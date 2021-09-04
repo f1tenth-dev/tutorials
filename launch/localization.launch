@@ -79,6 +79,6 @@
   <node        pkg            = 'rviz'
                type           = 'rviz'
                name           = 'rviz'
-               args           = '-d $(find f1tenth-sim)/rviz/localization.rviz'/>
+               args           = '-d $(find f1tenth-tutorials)/rviz/localization.rviz'/>
 
 </launch>

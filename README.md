@@ -29,22 +29,22 @@ user@ros-computer: cp -r autosim_ws/src/simulator/world/race_track .gazebo/model
 The above step needs to be completed only once, and the Gazebo simulator will be able to read the course information everytime the F1/10 simulator is launched. The user can now enter the following command in the terminal to launch the simulator for the first time:
 
 ```console
-user@ros-computer: roslaunch f1tenth-sim simulator.launch run_gazebo:=true
+user@ros-computer: roslaunch f1tenth-sim simulator.launch
 ```
 
 Notice the information on the terminal; if there are any errors during installation, they would be shown in a red font. Not all errors on the terminal are fatal and not all fatal errors are necessarily displayed on the terminal. The Gazebo window should eventually come up on the screen and you should be able to see the simulated environment. Use the mouse to navigate and get yourself familiar with the simulator.  
 
-In order to proceed to the next part of the tutorial press `ctrl + c` to exit the current session.
+To stop the simulation, simply press `ctrl + c` and wait until its finished.
 
 ## Keyboard Tele-Operation
-Keyboard teleoperation is the process of controlling the movement of the racecar using using computer's keyboard. The simulator release contains two teleoperation nodes meant to be ued with either a joystick game controller or the keyboard. This tutorial will focus only on the latter. For convenience, the keyboard teleoperation follows the conventional gaming control pattern `W-A-S-D` where W and S control forward and reverse velocities and A and D control steering position from left to right. The teleoperation node latches onto the control state of the car during the last recorded key stroke and makes this control state persist until a new command is recieved.
+Keyboard teleoperation is the process of controlling the movement of the racecar using using computer's keyboard. The simulator release contains two teleoperation nodes meant to be ued with either a joystick game controller or the keyboard. This tutorial will focus only on the latter. For convenience, the keyboard teleoperation follows the conventional gaming control pattern `W-A-S-D` where W and S control forward and reverse velocities and A and D control steering position from left to right and `Q` to completely stop the car. The teleoperation node latches onto the control state of the car during the last recorded key stroke and makes this control state persist until a new command is recieved.
 
-To bring up the simulator with the keyboard teleoperation node, kill any other simulation or Gazebo session that is active and enter the following command in a new terminal:
+To bring up the keyboard teleoperation node, enter the following command in a new terminal:
 
 ```console
-user@ros-computer: roslaunch f1tenth-sim simulator.launch run_gazebo:=true keyboard_control:=true
+user@ros-computer: roslaunch f1tenth-sim car_controller.launch keyboard_control:=true visualize:=true
 ```
 
-Wait for the simulator session to be launched and the Gazebo GUI to appear. The terminal from which the session was launch needs to be the active terminal and placed on top of the Gazebo GUI in order to accept the commands from the keyboard. Use the W-A-S-D keys to navigate the racecar around the racetrack. Use this opportunity to make yourself familiar with the handling of the racecar.
+To avoid relaunching the simulator, the teleoperation node is launched in a different terminal from the simulator. Wait for the teleoperation session to be launched and the RVIZ to appear. The terminal from which the session was launch needs to be the active terminal and placed on top of the Gazebo GUI in order to accept the commands from the keyboard. Use the W-A-S-D keys to navigate the racecar around the racetrack. Use this opportunity to make yourself familiar with the handling of the racecar.
 
 
