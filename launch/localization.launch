@@ -27,6 +27,9 @@
   <param       name           = 'frame_id'
                value          = 'map'/> </node>
 
+  <!-- spawn car using the set global parameters -->
+  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'/>
+
   <!-- particle filter node -->
 	<node        pkg            = 'particle_filter'
                type           = 'particle_filter.py'

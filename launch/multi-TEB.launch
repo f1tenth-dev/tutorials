@@ -8,7 +8,7 @@
                type           = 'multi_goal_set.py'/>
 
   <!-- spawn car using the set global parameters -->
-  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'/>
+  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'>
   <arg         name           = 'multi_car'
                value          = 'true'/> </include>
 

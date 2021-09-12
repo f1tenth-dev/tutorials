@@ -33,7 +33,7 @@
   <node        name           = 'trajectory_visualizer'
                pkg            = 'f1tenth-pure_pursuit'
                type           = 'trajectory_visualizer.py'
-               args           = 'raceline raceline_sectors_original'/>
+               args           = '$(arg car_name) raceline raceline_sectors_original'/>
 
   <!-- spawn car using the set global parameters -->
   <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'/>
