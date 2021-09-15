@@ -7,14 +7,6 @@
                value          = 'true'/>
   <arg         name           = 'car_name'
                default        = 'car_1'/>
-  <arg         name           = 'car_paint'
-               default        = 'Yellow'/>
-  <arg         name           = 'run_gazebo'
-               default        = 'true'/>
-  <arg         name           = 'x_pos'
-               default        = '2.5'/>
-  <arg         name           = 'y_pos'
-               default        = '-7.0'/>
   <arg         name           = 'run_rviz'
                default        = 'true'/>
   <arg         name           = 'run_map'
@@ -32,24 +24,11 @@
   <remap       from           = 'map'
                to             = '/map'/>
 
-  <!-- spawn car using the set global parameters -->
-  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'>
-  <arg         name           = 'car_name'
-               value          = '$(arg car_name)'/>
-  <arg         name           = 'paint'
-               value          = '$(arg car_paint)'/>
-  <arg         name           = 'run_gazebo'
-               value          = '$(arg run_gazebo)'/>
-  <arg         name           = 'x_pos'
-               value          = '$(arg x_pos)'/>
-  <arg         name           = 'y_pos'
-               value          = '$(arg y_pos)'/> </include>
-
   <group       ns             = '$(arg car_name)'>
 
   <!-- geometry_msgs/Twist to ackermann_msgs/AckermannDrive -->
   <node        name           = 'twist_ackermann_node'
-               pkg            = 'f1tenth-sim'
+               pkg            = 'f1tenth-tutorials'
                type           = 'twist_ackermann.py'
                args           = '$(arg car_name)'/>
 
@@ -59,7 +38,7 @@
                respawn        = 'false'
                name           = 'move_base'
                output         = 'screen'>
-  <rosparam    file           = '$(find f1tenth-sim)/config/navigation.yaml'
+  <rosparam    file           = '$(find f1tenth-tutorials)/config/navigation.yaml'
                command        = 'load'/>
   <param       name           = 'global_costmap/robot_base_frame'
                value          = '$(arg car_name)_base_link'/>
@@ -91,6 +70,6 @@
   <node        pkg            = 'rviz'
                type           = 'rviz'
                name           = 'rviz'
-               args           = '-d $(find f1tenth-sim)/rviz/navigation.rviz'/> </group>
+               args           = '-d $(find f1tenth-tutorials)/rviz/navigation.rviz'/> </group>
 
 </launch>

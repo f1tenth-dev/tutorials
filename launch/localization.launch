@@ -27,6 +27,9 @@
   <param       name           = 'frame_id'
                value          = 'map'/> </node>
 
+  <!-- spawn car using the set global parameters -->
+  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'/>
+
   <!-- particle filter node -->
 	<node        pkg            = 'particle_filter'
                type           = 'particle_filter.py'
@@ -79,6 +82,6 @@
   <node        pkg            = 'rviz'
                type           = 'rviz'
                name           = 'rviz'
-               args           = '-d $(find f1tenth-sim)/rviz/localization.rviz'/>
+               args           = '-d $(find f1tenth-tutorials)/rviz/localization.rviz'/>
 
 </launch>

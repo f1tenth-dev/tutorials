@@ -12,7 +12,7 @@ Pure-Pursuit path tracking algorithm has proven itself to be highly capable and 
 To overcome the limitations of the pure-pursuit controller as described in the paper, and to make it a true autonomous racing algorithm, we have introduced some changes to the algorithm by using a supervisory node to adapt the lookahead distance based on the properties of the track at each waypoint along the raceline. We call this modification the Adaptive-Lookahead Pure-Pursuit. For this tutorial, we will use one of the modified racelines which contain information about lookahead distance at each waypoint to demonstrate the performance of the pure-pursuit controller and why we prefer this controller for autonomous racing. Kill all existing ROS nodes and the simulator (if running) and open a new terminal to enter the following command:
 
 ```console
-user@ros-computer: roslaunch f1tenth-sim purepursuit_one_car.launch
+user@ros-computer: roslaunch f1tenth-tutorials purepursuit_one_car.launch
 ```
 
 The *rviz* window created uses a pre-configured setup for the pure-pursuit controller. The elements to note within the window are the raceline which is composed of different segments denoted using different colors which correspond to unique lookahead distances assigned to that segment of the raceline. The racecar will achieve the highest velocity at green segments and lowest at the red segments. It is interesting to note that the racecar in this tutorial is travelling twice as fast in its slowest setting compared to the highest speed achieved using the T.E.B. planner and ROS navigation described in the previous tutorial section.
@@ -20,7 +20,7 @@ The *rviz* window created uses a pre-configured setup for the pure-pursuit contr
 ## Multiple Autononomous Racecars
 One of the salient features of the F1/10 simulator is the ability to spawn multiple racecars, and this feature can be used at the start of the simulation if you are interested in dynamic or head-to-head racing, or spawned at random during a current simulation session if you want to spawn racecars anywhere in the race track to test obstacle avoidance etc. Both of these capabilities are described in detail in this tutorial.
 
-A launch file is the quickest way to start the simulator with multiple racecars. The simulator is provided with a `vehicle_class.launch.xml` file that can be imported into the main launch file for every racecar. The name assigned to the racecar becomes the namespace under which all nodes and packages for the said racecar is created. Along with unique names for each racecar, the user must specify the spawn location within the racetrack. For simplification, the simulator's origin is at the center of the race track, while the start/finish line is at `(-2.5m, 7.0m)` away from the center. The template to use in the launch file is shown below:
+A launch file is the quickest way to start the simulator with multiple racecars. The simulator is provided with a `car_gazebo.launch` file in `f1tenth-sim` that can be imported into the main launch file for every racecar. The name assigned to the racecar becomes the namespace under which all nodes and packages for the said racecar is created. Along with unique names for each racecar, the user must specify the spawn location within the racetrack. For simplification, the simulator's origin is at the center of the race track, while the start/finish line is at `(-2.5m, 7.0m)` away from the center. The template to use in the launch file is shown below:
 
 ```xml
 <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'>
@@ -39,7 +39,7 @@ A launch file is the quickest way to start the simulator with multiple racecars.
 In the template, you will notice the parameter `run_gazebo` which has to be set to `true` only for the first racecar and must be set to `false` for all subsequent racecars otherwise the simulator GUI will be forced to spawn multipe sessions ultimately leading to a crash. While this will not damage the simulator or the local machine, you might run into memory issues and have to restart the machine. An example for multiple autonomous cars is provided with the simulator; open a new terminal and enter the following command:
 
 ```console
-user@ros-computer: roslaunch f1tenth-sim multi-TEB.launch
+user@ros-computer: roslaunch f1tenth-tutorials multi-TEB.launch
 ```
 
 The simulator should have spawned multiple racecars each running a TEB based navigation stack. Use the `set_goal` command in the `rviz` window to set a goal and you will notice all racecars moving to the goal. We encourage you to repeat the above steps and have multiple racecars use pure-pursuit tracking to follow the raceline described in the previous tutorial. The following video shows multiple autonomous racecars using adaptive pure-pursuit for high speed racing in the simulator.

@@ -16,19 +16,30 @@
   <node        name           = 'world_map_link'
                pkg            = 'tf'
                type           = 'static_transform_publisher'
-               args           = '1.0 0.0 0.0 0.0 0.0 0.0 world map 100'/>
+               args           = '0.0 0.0 0.0 0.0 0.0 0.0 world map 100'/>
+
+  <!-- static transform between map and odom (special case) -->
+  <node        name='map_$(arg car_name)_odom_link' 
+               pkg='tf' 
+               type='static_transform_publisher' 
+               args='0.0 0.0 0.0 0.0 0.0 0.0 map $(arg car_name)_odom 100'/>
+
+  <!-- spawn car using the set global parameters -->
+  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'>
+  <arg         name           = 'mapping_tf'
+               default        = 'true'/> </include>
 
   <!-- hector_mapping default parameters -->
   <include     file           = '$(find hector_mapping)/launch/mapping_default.launch'>
   <arg         name           = 'base_frame'
                default        = '$(arg car_name)_base_link'/>
   <arg         name           = 'odom_frame'
-               default        = '$(arg car_name)_base_link'/>
+               default        = '$(arg car_name)_odom'/>
   <arg         name           = 'scan_topic'
                default        = '$(arg car_name)/scan'/> </include>
 
   <!-- geotiff mapping node -->
-  <include     file           = '$(find hector_geotiff)/launch/geotiff_mapper.launch'>
+  <include     file           = '$(find hector_geotiff_launch)/launch/geotiff_mapper.launch'>
   <arg         name           = 'trajectory_source_frame_name'
                value          = 'scanmatcher_frame'/>
   <arg         name           = 'map_file_path'
@@ -38,6 +49,6 @@
   <node        pkg            = 'rviz'
                type           = 'rviz'
                name           = 'rviz'
-               args           = '-d $(find f1tenth-sim)/rviz/mapping.rviz'/>
+               args           = '-d $(find f1tenth-tutorials)/rviz/mapping.rviz'/>
 
 </launch>

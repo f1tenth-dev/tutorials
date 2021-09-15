@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+
+<launch>
+
+  <!-- set goal across all racecars -->
+  <node        name           = 'multi_goal_set'
+               pkg            = 'f1tenth-tutorials'
+               type           = 'multi_goal_set.py'/>
+
+  <!-- spawn car using the set global parameters -->
+  <include     file           = '$(find f1tenth-sim)/launch/simulator.launch'>
+  <arg         name           = 'multi_car'
+               value          = 'true'/> </include>
+
+
+  <!-- spawn car_1 with TEB based navigation stack -->
+  <include     file           = '$(find f1tenth-tutorials)/launch/navigation.launch'>
+  <arg         name           = 'car_name'
+               value          = 'car_1'/>
+  <arg         name           = 'run_map'
+               value          = 'true'/>
+  <arg         name           = 'run_rviz'
+               value          = 'false'/> </include>
+
+  <!-- spawn car_2 with TEB based navigation stack -->
+  <include     file           = '$(find f1tenth-tutorials)/launch/navigation.launch'>
+  <arg         name           = 'car_name'
+               value          = 'car_2'/>
+  <arg         name           = 'run_map'
+               value          = 'false'/>
+  <arg         name           = 'run_rviz'
+               value          = 'false'/> </include>
+
+  <!-- spawn car_3 with TEB based navigation stack -->
+  <include     file           = '$(find f1tenth-tutorials)/launch/navigation.launch'>
+  <arg         name           = 'car_name'
+               value          = 'car_3'/>
+  <arg         name           = 'run_map'
+               value          = 'false'/>
+  <arg         name           = 'run_rviz'
+               value          = 'false'/> </include>
+
+  <!-- launch rviz with navigation configuration -->
+  <node        pkg            = 'rviz'
+               type           = 'rviz'
+               name           = 'rviz'
+               args           = '-d $(find f1tenth-tutorials)/rviz/multi-TEB.rviz'/>
+
+</launch>

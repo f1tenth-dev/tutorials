@@ -11,7 +11,7 @@ For modifying the state of individual racecars in the simulator, we have provide
 The node expects 2 additional arguments where each argument is a tuple. The first tuple is the desired positional information and the second tuple is the desired initial velocity after spawn. To test this capability, open a new terminal to launch the simulator:
 
 ```console
-user@ros-computer: roslaunch f1tenth-sim simulator run_gazebo:=false
+user@ros-computer: roslaunch f1tenth-sim simulator.launch
 ```
 
 Observe the position of the racecar in the siulator GUI and launch a new terminal to enter the following command. The tuple contains 3 elements describing the information on each axis relative to the race track; for the first positional tuple, the structure is `x_pos y_pos z_pos` and for the second velocity tuple: `x_vel y_vel z_vel`. All data within the tuple must be a float for the node to work.
